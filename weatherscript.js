@@ -19,7 +19,9 @@ const displayweather = (event) => {
 }
 
 const currentweather = (city) => {
-    var apiquery= "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + api;
+    var apiquery= "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + api + "&units=imperial"
+    ; 
+
     $.ajax({
         url:apiquery,
         method:"get",
@@ -31,6 +33,12 @@ const currentweather = (city) => {
         var today=moment(response)
        
         $(currentcity).html(response.name +"("+today.format("dddd, MMMM Do")+")");
+
+        // .current.weather[0].icon https://openweathermap.org/img/wn/${icon}@2x.png"
+        // .daily[0].weather[0].icon
+        // https://openweathermap.org/weather-conditions
+
+
        
         var temperature = (response.main.temp)
         
