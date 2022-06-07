@@ -8,14 +8,16 @@
     <meta name="generator" content="Hugo 0.98.0">
     <title>Blog Template · Bootstrap v5.2</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy" crossorigin="anonymous"></script>
-
+    
+    
     <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/blog/">
 
     
 
-<link href=blog.css rel="stylesheet">
+
 
     <!-- <style>
       .bd-placeholder-img {
@@ -88,8 +90,8 @@
         <a class="blog-header-logo text-dark" href="#">WeatherApp</a>
       </div>
       <div class="col-4 d-flex justify-content-end align-items-center">
-        <input name="text" cols="30" rows="1" placeholder="input city here"> </input>
-          <a class="btn btn-sm btn-outline-secondary" href="#">Search</a>
+        <input name="text" cols="30" rows="1" placeholder="input city here" class="form-control" id = "search-city"> </input>
+          <button class="btn btn-sm btn-outline-secondary" id = search-button href="#">Search</button>
       </div>
     </div>
   </header>
@@ -114,10 +116,12 @@
 
 <main class="container">
   <div class="p-4 p-md-5 mb-4 text-white rounded bg-dark">
-    <div class="col-md-6 px-0">
-      <h1 class="display-4 fst-italic">Title of a longer featured blog post</h1>
-      <p class="lead my-3">Multiple lines of text that form the lede, informing new readers quickly and efficiently about what’s most interesting in this post’s contents.</p>
-      <p class="lead mb-0"><a href="#" class="text-white fw-bold">Continue reading...</a></p>
+    <div class="col-md-6 px-0" id = current-weather>
+      <h1 class="display-4 fst-italic" id = current-city></h1>
+      <p>Temperature: <span class="current" id="temperature"></span></p>
+      <p>Humidity: <span class="current" id="humidity"></span></p> 
+      <p>Wind Speed: <span class="current" id="wind-speed"></span></p>
+      <p>UV index: <span class="current" id="uv-index"></span></p> 
     </div>
   </div>
 
@@ -320,6 +324,9 @@
   </div>
 
 </main>
+
+<script src="weatherscript.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 
 <footer class="blog-footer">
   <p>Blog template built for <a href="https://getbootstrap.com/">Bootstrap</a> by <a href="https://twitter.com/mdo">@mdo</a>.</p>
