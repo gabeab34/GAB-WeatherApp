@@ -47,7 +47,7 @@ localStorage.setItem('cities', JSON.stringify(storedcities));
 if(storedcities!=null){
     for(var x =0; x < storedcities.length; x++){
   
-    displaystoredcities.innerHTML += `<button class=city-button value = "${storedcities[x]}" onclick = "citybutton(this.value)">` + storedcities[x].toUpperCase() +`</button>`;
+    displaystoredcities.innerHTML += `<button class= city-button id= city-button href="#" value = "${storedcities[x]}" onclick = "returnweather(this.value)">` + storedcities[x].toUpperCase() +`</button>`;
        if (localStorage.length > 0) {
            localStorage.clear();
        }
@@ -142,9 +142,11 @@ const UVIndex = (ln,lt) => {
     
 }
 
-const citybutton = (value) => {
+const returnweather = (value) => {
 
     var searchedcity = value;
+    currentweather(searchedcity)
+    
 
     
 
@@ -152,4 +154,5 @@ const citybutton = (value) => {
 
 
 $("#search-button").on("click",displayweather);
+
 
