@@ -7,7 +7,7 @@ var currenthumidity     = $("#humidity");
 var currentwindspeed    = $("#wind-speed");
 var currentUVindex      = $("#uv-index");
 var searchcity          = $("#search-city");
-
+var displaystoredcities = document.querySelector(".stored-cities");
 
 const displayweather = (event) => {
     event.preventDefault();
@@ -16,6 +16,8 @@ const displayweather = (event) => {
         currentweather(city);
     }
 }
+
+
 
 const currentweather = (city) => {
     var apiquery= "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + api + "&units=imperial"; 
@@ -26,16 +28,41 @@ const currentweather = (city) => {
     }).then((response) => {
 
         
-        console.log(response);
         
         var today=moment(response)
         
         var icon = response.weather[0].icon
 
-        var iconsrc =  "https://openweathermap.org/img/wn/"+icon +"@2x.png";
+        var iconsrc =  "https://openweathermap.org/img/w/"+ icon +".png";
 
-        $(currentcity).html(response.name + "<br></br>" + ""+today.format("dddd, MMMM Do")  + "<img src=" +iconsrc+">");
+        $(currentcity).html(response.name + "<img src=" +iconsrc+">" + "<br></br>"  + ""+today.format("dddd, MMMM Do") + "<br></br>" );
+            
+if (localStorage.getItem('cities') == null) {
+    localStorage.setItem('cities', '[]')
+ }
+  
+var storedcities = JSON.parse(localStorage.getItem('cities'));
+storedcities.push(city);
+localStorage.setItem('cities', JSON.stringify(storedcities));                
+if(storedcities!=null){
+    for(var x =0; x < storedcities.length; x++){
+  
+    displaystoredcities.innerHTML += `<button class=city-button value = "${storedcities[x]}" onclick = "citybutton(this.value)">` + storedcities[x].toUpperCase() +`</button>`;
+       if (localStorage.length > 0) {
+           localStorage.clear();
+       }
+  
+  }
+  }           
 
+
+                              
+                    
+                    
+        
+        
+            
+                    
         // .current.weather[0].icon https://openweathermap.org/img/wn/${icon}@2x.png"
         // .daily[0].weather[0].icon
         // https://openweathermap.org/weather-conditions
@@ -55,6 +82,7 @@ const currentweather = (city) => {
         $(currentwindspeed).html(wind);
         
         UVIndex(response.coord.lon,response.coord.lat);
+
         
 
        
@@ -73,6 +101,7 @@ const UVIndex = (ln,lt) => {
         }).then((response) => {
             $(currentUVindex).html(response.value);
             fiveday(response.id)
+            
         });
         
 
@@ -87,7 +116,7 @@ const UVIndex = (ln,lt) => {
                 for (i=0;i<5;i++){
                     var date= new Date((response.list[((i+1)*8)-1].dt)*1000).toLocaleDateString();
                     var iconcode= response.list[((i+1)*8)-1].weather[0].icon;
-                    var iconurl="https://openweathermap.org/img/wn/"+iconcode+".png";
+                    var iconurl="https://openweathermap.org/img/w/"+iconcode+".png";
                     var temperature= (response.list[((i+1)*8)-1].main.temp);
                     var humidity= response.list[((i+1)*8)-1].main.humidity;
                     var wind =  response.list[((i+1)*8)-1].wind.speed
@@ -113,8 +142,13 @@ const UVIndex = (ln,lt) => {
     
 }
 
+const citybutton = (value) => {
 
+    var searchedcity = value;
 
+    
+
+}
 
 
 $("#search-button").on("click",displayweather);
