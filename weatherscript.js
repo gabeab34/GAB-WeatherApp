@@ -48,7 +48,7 @@ const currentweather = (city) => {
         
         $(currenthumidity).html(response.main.humidity);
         
-        var ws=response.wind.speed;
+        var ws = response.wind.speed;
         
         var wind=(ws)
         
@@ -90,11 +90,13 @@ const UVIndex = (ln,lt) => {
                     var iconurl="https://openweathermap.org/img/wn/"+iconcode+".png";
                     var temperature= (response.list[((i+1)*8)-1].main.temp);
                     var humidity= response.list[((i+1)*8)-1].main.humidity;
-                
+                    var wind =  response.list[((i+1)*8)-1].wind.speed
+                    
                     $("#fiveday"+i).html(date);
                     $("#fiveday"+i).append("<img src="+iconurl+">");
-                    $("#fiveday"+i).append(temperature);
-                    $("#fiveday"+i).append( "<br></br>" + humidity+"%");
+                    $("#fiveday"+i).append(temperature+ "°F");
+                    $("#fiveday"+i).append( "<br></br>" + "humidity: " + humidity+"%");
+                    $("#fiveday"+i).append( "<br></br>" + "wind speed: "+ wind+ " mph");
                 }
                 
             });
