@@ -100,6 +100,15 @@ const UVIndex = (ln,lt) => {
         method:"get"
         }).then((response) => {
             $(currentUVindex).html(response.value);
+                if ((response.value) <= 2 ) {
+                document.getElementById("uv-index").style.background = "#00FF00"
+                }
+                 else if ((response.value) <= 7 ) {
+                    document.getElementById("uv-index").style.background = "#FFFF00"
+                    }
+                 else if ((response.value) > 7  ) {
+                    document.getElementById("uv-index").style.background = "#FF0000"
+                }
             fiveday(response.id)
             
         });
