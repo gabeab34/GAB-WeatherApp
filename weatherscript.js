@@ -55,20 +55,6 @@ if(storedcities!=null){
   }
   }           
 
-
-                              
-                    
-                    
-        
-        
-            
-                    
-        // .current.weather[0].icon https://openweathermap.org/img/wn/${icon}@2x.png"
-        // .daily[0].weather[0].icon
-        // https://openweathermap.org/weather-conditions
-
-
-       
         var temperature = (response.main.temp)
         
         $(currenttemperature).html(temperature);
